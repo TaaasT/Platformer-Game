@@ -9,6 +9,15 @@ public class PlayerMovment : MonoBehaviour
     Rigidbody2D myBody;
     Animator anim;
 
+    public Transform groundCheckPosition;
+    public LayerMask groundLayer;
+
+    private bool isGrounded;
+    private bool jumped;
+
+    private float jumpPower = 5f;
+
+
     private void Awake()
     {
         myBody = GetComponent<Rigidbody2D>();
@@ -22,7 +31,8 @@ public class PlayerMovment : MonoBehaviour
 
     void Update()
     {
-        
+        CheckIfGrounded();
+        PlayerJump();
     }
 
     private void FixedUpdate()
@@ -62,11 +72,30 @@ public class PlayerMovment : MonoBehaviour
         transform.localScale = tempScale;
     }
 
-    private void OnCollisionEnter2D(Collision2D target)
+    void CheckIfGrounded()
     {
-        if(target.gameObject.tag == "Ground")
+        isGrounded = Physics2D.Raycast(groundCheckPosition.position, Vector2.down, 0.1f, groundLayer);
+
+        if(isGrounded)
         {
-            
+            if (jumped)
+            {
+                jumped = false;
+                anim.SetBool("Jump", false);
+            }
+        }
+    }
+
+   void PlayerJump()
+    {
+        if (isGrounded)
+        {
+            if(Input.GetKey(KeyCode.Space))
+            {
+                jumped = true;
+                myBody.velocity = new Vector2(myBody.velocity.x, jumpPower);
+                anim.SetBool("Jump", true);
+            }
         }
     }
 
