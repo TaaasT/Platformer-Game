@@ -37,10 +37,29 @@ public class PlayerMovment : MonoBehaviour
         if(h > 0)
         {
             myBody.velocity = new Vector2(speed, myBody.velocity.y);
+
+            ChangeDirection(1);
         }
         else if(h < 0)
         {
             myBody.velocity = new Vector2(-speed, myBody.velocity.y);
+
+            ChangeDirection(-1);
         }
+        else
+        {
+            myBody.velocity = new Vector2(0f, myBody.velocity.y);
+        }
+
+        anim.SetInteger("Speed", Mathf.Abs((int)myBody.velocity.x));
+
     }
+
+    void ChangeDirection(int direction)
+    {
+        Vector3 tempScale = transform.localScale;
+        tempScale.x = direction;
+        transform.localScale = tempScale;
+    }
+
 }
