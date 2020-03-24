@@ -71,11 +71,36 @@ public class Snail : MonoBehaviour
 
                     anim.Play("Stunned");
                     stunned = true;
+
+                    if(tag == MyTags.BEETLE_TAG)
+                    {
+                        anim.Play("Stunned");
+                        StartCoroutine(Dead(0.5f));
+                    }
                 }
             }
         }
 
-        if(rightHit)
+        if (leftHit)
+        {
+            if (leftHit.collider.gameObject.tag == MyTags.PLAYER_TAG)
+            {
+                if (!stunned)
+                {
+
+                }
+                else
+                {
+                    if(tag != MyTags.BEETLE_TAG)
+                    {
+                        myBody.velocity = new Vector2(15f, myBody.velocity.y);
+                        StartCoroutine(Dead(3f));
+                    }
+                }
+            }
+        }
+
+        if (rightHit)
         {
             if(rightHit.collider.gameObject.tag == MyTags.PLAYER_TAG)
             {
@@ -85,22 +110,11 @@ public class Snail : MonoBehaviour
                 }
                 else
                 {
-                    myBody.velocity = new Vector2(-15f, myBody.velocity.y);
-                }
-            }
-        }
-
-        if(leftHit)
-        {
-            if (leftHit.collider.gameObject.tag == MyTags.PLAYER_TAG)
-            {
-                if(!stunned)
-                {
-
-                }
-                else
-                {
-                    myBody.velocity = new Vector2(15f, myBody.velocity.y);
+                    if (tag != MyTags.BEETLE_TAG)
+                    {
+                        myBody.velocity = new Vector2(-15f, myBody.velocity.y);
+                        StartCoroutine(Dead(3f));
+                    }
                 }
             }
         }
@@ -132,6 +146,12 @@ public class Snail : MonoBehaviour
             right_Collision.position = left_Collision_Pos;
         }
         transform.localScale = tempScale;
+    }
+
+    IEnumerator Dead(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        gameObject.SetActive(false);
     }
 
 }
