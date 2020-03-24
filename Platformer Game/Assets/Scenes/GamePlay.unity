@@ -675,6 +675,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snail
       objectReference: {fileID: 0}
+    - target: {fileID: 8707813464354782508, guid: ba70455bc687652469b945d926a8afb5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Snail
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba70455bc687652469b945d926a8afb5, type: 3}
 --- !u!1001 &8918607733612575109
@@ -684,15 +689,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4663518025531862272, guid: 3d1467a475b9219418c5d5bfcc518712,
+        type: 3}
+      propertyPath: fireBullet
+      value: 
+      objectReference: {fileID: 6989874088628560922, guid: 06d941a65c8c0034c912e2cdcba1c17e,
+        type: 3}
     - target: {fileID: 8918607734396384275, guid: 3d1467a475b9219418c5d5bfcc518712,
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918607734396384275, guid: 3d1467a475b9219418c5d5bfcc518712,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8918607734396384284, guid: 3d1467a475b9219418c5d5bfcc518712,
         type: 3}
